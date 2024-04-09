@@ -5,6 +5,13 @@ import { removeTodo, editTodo } from "../features/todo/todoSlice";
 function Todos() {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+
+  const editHandler = () => {
+    console.log("eidt");
+    const todoInput = document.querySelector("#todoInput");
+    todoInput.removeAttribute("readonly");
+  };
+
   return (
     <>
       <div>Todos</div>
@@ -14,8 +21,7 @@ function Todos() {
             className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-            {" "}
-            <div className="text-white">{todo.text}</div>
+            <input type="text" value={todo.text} id="todoInput" />
             <button
               onClick={() => dispatch(removeTodo(todo.id))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
@@ -36,7 +42,7 @@ function Todos() {
               </svg>
             </button>
             <button
-              onClick={() => dispatch(editTodo(todo.id))}
+              onClick={editHandler}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
             >
               <svg

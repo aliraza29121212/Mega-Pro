@@ -1,9 +1,9 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+import React, { useState } from "react";
 
 const initialState = {
   todos: [{ id: 1, text: "hello todo" }],
 };
-
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
@@ -27,7 +27,6 @@ export const todoSlice = createSlice({
       state.todos.forEach((todo) => {
         const editVal = todo.text;
         console.log(editVal);
-        console.log(action.payload);
       });
     },
   },
