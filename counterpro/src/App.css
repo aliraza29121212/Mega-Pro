@@ -1,0 +1,23 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+body {
+  background-color: rgba(0, 0, 0, 0.941);
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 4rem;
+  align-items: center;
+  color: white;
+  gap: 40px;
+}
+button img {
+  max-height: 40px;
+}
