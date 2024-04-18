@@ -7,6 +7,8 @@ function AppleBasket({ appleCounter, BasketName }) {
         <span>{appleCounter}</span>apples
       </h1>
       <p>{BasketName}</p>
+      {appleCounter === 10 && <span>(Full)</span>}
+      {appleCounter === 0 && <span>(Epmty)</span>}
     </div>
   );
 }
