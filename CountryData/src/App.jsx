@@ -1,21 +1,15 @@
-import React from "react";
-import "./App.css";
 import Header from "./Components/Header";
-import Searchbar from "./Components/Searchbar";
-import SelectMenu from "./Components/SelectMenu";
-import CountriesContainer from "./Components/CountriesContainer";
+import { Outlet } from "react-router-dom";
 
-function App() {
+import "./App.css";
+
+const App = () => {
   return (
     <>
       <Header />
-      <div className="search-filter-container">
-        <Searchbar />
-        <SelectMenu />
-      </div>
-      <CountriesContainer />
+      <Outlet />
     </>
   );
-}
+};
 
 export default App;

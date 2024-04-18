@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 function CountryCard({ name, flag, population, region, capital, key }) {
   return (
     <div key={key}>
-      <a className="country-card" href="">
+      <Link className="country-card" to={`/contrydetail?name=${name}`}>
         <img src={flag} alt={`${name} ${flag}`} />
         <div className="card-text">
           <h3 className="card-title">{name}</h3>
@@ -19,7 +20,7 @@ function CountryCard({ name, flag, population, region, capital, key }) {
             {capital}
           </p>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }
