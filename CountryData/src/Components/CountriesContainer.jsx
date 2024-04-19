@@ -12,7 +12,6 @@ function CountriesContainer({ query }) {
       .then((res) => res.json())
       .then((data) => {
         setCoutriesData(data);
-        console.log(countriesData);
       });
   }, []);
 
@@ -32,13 +31,13 @@ function CountriesContainer({ query }) {
                 region={country.region}
                 capital={country.capital?.[0]}
                 key={country.name.common}
+                data={country}
               />
             );
           })}
       </div>
     </>
   );
-  console.log(countriesData);
   return <div className="countries-container">{array}</div>;
 }
 
