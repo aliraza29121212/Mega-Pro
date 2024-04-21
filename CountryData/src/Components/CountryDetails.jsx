@@ -3,6 +3,7 @@ import "./CountryDetails.css";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext.jsx";
+import { useWnidowSize } from "../hooks/UseWindowSize.js";
 const CountryDetails = () => {
   const params = useParams();
   const { state } = useLocation();
@@ -12,6 +13,13 @@ const CountryDetails = () => {
 
   const [countryData, setCountryData] = useState(null);
   const [notFound, setNotFound] = useState(false);
+
+
+// window size
+const width = useWnidowSize()
+
+
+
 
   //   use location
   console.log(state);
@@ -52,6 +60,7 @@ const CountryDetails = () => {
   //     });
   //   }
 
+  
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
       .then((res) => res.json())
@@ -100,6 +109,8 @@ const CountryDetails = () => {
     "loading..."
   ) : (
     <main className={`${isDark? 'dark': ''}`}>
+              <h2>Window Width: {width}</h2>
+
       <div className="country-details-container">
         <span className="back-button" onClick={() => history.back()}>
           <i className="fa-solid fa-arrow-left"></i>&nbsp; Back

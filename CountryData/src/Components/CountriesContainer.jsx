@@ -3,7 +3,7 @@ import { useEffect, useId, useState } from "react";
 // import countriesData from "../Components/countriesData.js";
 import CountryCard from "../Components/CountryCard.jsx";
 
-function CountriesContainer({ query }) {
+function CountriesContainer({ query,select }) {
   const id = useId();
   const [countriesData, setCoutriesData] = useState([]);
 
@@ -20,7 +20,7 @@ function CountriesContainer({ query }) {
       <div className="contries-container">
         {countriesData
           .filter((country) =>
-            country.name.common.toLowerCase().includes(query)
+            country.name.common.toLowerCase().includes(query) || country.region.toLowerCase().includes(query)
           )
           .map((country, i) => {
             return (
