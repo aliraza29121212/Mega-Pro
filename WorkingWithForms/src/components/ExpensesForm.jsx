@@ -1,33 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function ExpensesForm({setExpenses}) {
-const handleSubmit=(e)=>{
+  // const [title,setTitle]= useState('');
+  // const [category,setCategory]= useState('');
+  // const [amount,setAmount]= useState('');
+
+  const [error,setError] = useState('')
+
+  const [expense,setExpense] =useState({
+    title: '',
+    category: '',
+    amount: ''
+  })
+  const handleSubmit=(e)=>{
     e.preventDefault();
-    const expense= {...getFormData(e.target),id: crypto.randomUUID()} 
-    setExpenses((prevState)=> [...prevState, expense])
-    e.target.reset()
+
+    if (!expense.title || !expense.category || !expense.amount) {
+      setError("Please fill all the form fields");
+    }else{
+
+   
+
+    setExpenses((prevState) => [
+      ...prevState,
+      { ...expense, id: crypto.randomUUID() }
+    ]); 
+    
+     }
+     // const expense = {title,category,amount,id: crypto.randomUUID}
+    // setExpenses((prevState)=>[...prevState,expense])
+    // setTitle("");
+    // setCategory("")
+    // setAmount("")
+
+
+    // const expense= {...getFormData(e.target),id: crypto.randomUUID()} 
+    // setExpenses((prevState)=> [...prevState, expense])
+    // e.target.reset()
 }
 
-const getFormData =(form)=>{
-    const formData = new FormData(form)
-const data = {}
-for (const[key,value] of formData.entries()){
-    data[key] = value
+// const getFormData =(form)=>{
+//     const formData = new FormData(form)
+// const data = {}
+// for (const[key,value] of formData.entries()){
+//     data[key] = value
+// }
+// return data
+
+// }
+
+const handleChange = (e)=>{
+  const {name,value} = e.target;
+   setExpense((prevState)=>({...prevState,[name]: value}))
 }
-return data
-
-}
-
-
   return (
-    <form className="expense-form" onSubmit={handleSubmit}>
+    <>
+    <div style={{display:"block"}}>
+        <h3 style={{color:"red"}}>{error}</h3>
+
+     <form className="expense-form" onSubmit={handleSubmit}>
       <div className="input-container">
         <label htmlFor="title">Title</label>
-        <input id="title" name="title" />
+        <input id="title" name="title" value={expense.title} onChange={handleChange}  />
       </div>
       <div className="input-container">
         <label htmlFor="category">Category</label>
-        <select id="category" name="category">
+        <select id="category" name="category" value={expense.category}  onChange={(e)=> setExpense((prevState)=>({...prevState,category: e.target.value}))}>
           <option value="" hidden>
             Select Category
           </option>
@@ -40,10 +78,13 @@ return data
       </div>
       <div className="input-container">
         <label htmlFor="amount">Amount</label>
-        <input id="amount" name="amount" />
+        <input id="amount" name="amount"  value={expense.amount}  onChange={(e)=> setExpense((prevState)=>({...prevState,amount: e.target.value}))}/>
       </div>
       <button className="add-btn">Add</button>
     </form>
+    </div>
+    </>
+ 
   )
 }
 
