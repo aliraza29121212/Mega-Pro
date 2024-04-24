@@ -15,6 +15,11 @@ function ExpenseTable({
     return expenses.category.toLowerCase().includes(category);
   });
 
+  const total = expenses.reduce(
+    (accummulator, current) => accummulator + parseInt(current.amount),
+    0
+  );
+
   return (
     <>
       <ContextMenu
@@ -86,7 +91,7 @@ function ExpenseTable({
           <tr>
             <th>Total</th>
             <th></th>
-            <th>₹8100</th>
+            <th>${total}</th>
           </tr>
         </tbody>
       </table>

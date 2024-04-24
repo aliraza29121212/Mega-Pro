@@ -119,6 +119,7 @@ function ExpensesForm({
             <input
               id="amount"
               name="amount"
+              type="number"
               value={expense.amount}
               onChange={(e) =>
                 setExpense((prevState) => ({
