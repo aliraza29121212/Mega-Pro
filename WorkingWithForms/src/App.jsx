@@ -10,8 +10,8 @@ function App() {
     <main>
       <h1>Track your Expense</h1>
       <div className="expense-tracker">
-        <ExpensesForm setExpenses={setExpenses}/>
-        <ExpenseTable expenses={expenses}/>
+        <ExpensesForm setExpenses={setExpenses} />
+        <ExpenseTable expenses={expenses} setExpenses={setExpenses}/>
       </div>
     </main>
   )

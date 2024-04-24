@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ContextMenu from "./ContextMenu"
 
-function ExpenseTable({expenses}) {
+function ExpenseTable({expenses,setExpenses}) {
+  const [category,setCategory]= useState('')
+  const [menuPosition,setMenuPosition] = useState({})
+  const [rowId,setRowId]=useState(0)
+const filterData = expenses.filter((expenses)=>{
+  return expenses.category.toLowerCase().includes(category)
+})
+
   return (
-    <table className="expense-table">
+    <>
+    <ContextMenu menuPosition={menuPosition} setMenuPosition={setMenuPosition} setExpenses={setExpenses} rowId={rowId}/>
+    <table className="expense-table" onClick={()=> setMenuPosition({})}>
       <thead>
         <tr>
           <th>Title</th>
           <th>
-            <select>
+            <select onChange={(e)=>setCategory(e.target.value.toLowerCase())}>
               <option value="">All</option>
               <option value="grocery">Grocery</option>
               <option value="clothes">Clothes</option>
@@ -43,8 +53,13 @@ function ExpenseTable({expenses}) {
       </thead>
       <tbody>
         {
-            expenses.map(({id,title,category,amount})=>(
-                <tr key={id}>
+            filterData.map(({id,title,category,amount})=>(
+                <tr key={id} onContextMenu={(e)=>{
+                  e.preventDefault()
+                  setMenuPosition({left:e.clientX, top:e.clientY})
+                  setRowId(id)
+                  console.log(id)
+                }}>
                 <th>{title}</th>
                 <th>{category}</th>
                 <th>${amount}</th>
@@ -58,6 +73,7 @@ function ExpenseTable({expenses}) {
         </tr>
       </tbody>
     </table>
+    </>
   )
 }
 
